@@ -39,13 +39,14 @@ read -rsp $'Press any key to continue...\n' -n1
 # apt-get install phpmyadmin
 # read -rsp $'Press any key to continue...\n' -n1
 
-# Configure Apache rewrite
-clear
-echo "Config Apache"
-a2enmod rewrite
 #  Config /etc/apache2/apache2.conf
 #  'AllowOverride None' with 'AllowOverride All'
+clear
+echo "Config Apache"
 sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
+# Configure Apache rewrite
+a2enmod rewrite
 service apache2 restart
 read -rsp $'Press any key to continue...\n' -n1
 
@@ -68,6 +69,7 @@ echo "Downloading Elgg and unzip"
 cd /var/www/
 wget http://elgg.org/getelgg.php?forward=elgg-2.1.1.zip -O elgg.zip
 unzip elgg.zip
+rm elgg.zip
 read -rsp $'Press any key to continue...\n' -n1
 
 # Move the folder to the web server document directory.
@@ -79,11 +81,12 @@ read -rsp $'Press any key to continue...\n' -n1
 # Setting data directory and writeable by the webserver (www-data = Apache user).
 mkdir /var/elggdata
 chown www-data:www-data /var/elggdata
+chmod 770 /var/elggdata
 
-# Move config files --> Elgg creates it on install step
-
-# Copy .htaccess --> Confirm path
-cp /var/www/elgg/vendor/elgg/elgg/install/config/htaccess.dist /var/www/.htaccess
+# Modify Elgg .htaccess 
+cd /var/www/elgg
+sed -i 's/#RewriteBase \/sites\/elgg\//RewriteBase \/elgg\//g' .htaccess
+read -rsp $'Press any key to continue...\n' -n1
 
 # Configure settings.php
 cp /var/www/elgg/vendor/elgg/elgg/elgg-config/settings.example.php /var/www/elgg/elgg-config/settings.php
