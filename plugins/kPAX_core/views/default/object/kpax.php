@@ -12,6 +12,17 @@ if (!$kpax) {
     return TRUE;
 }
 
+// fetch game
+$objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
+$response = $objKpax->getGame($kpax->guid, $_SESSION["campusSession"]);
+
+// TODO check errors - what to do
+if ($response['status'] != 200) {
+    return TRUE;
+}
+
+$objGame = $response['body'];
+
 $owner = $kpax->getOwnerEntity();
 $container = $kpax->getContainerEntity();
 $categories = elgg_view('output/categories', $vars);
@@ -21,10 +32,10 @@ $owner_icon = elgg_view_entity_icon($owner, 'tiny');
 $owner_link = elgg_view('output/url', array(
     'href' => "kpax/owner/$owner->username",
     'text' => $owner->name,
-        ));
+));
 $author_text = elgg_echo('byline', array($owner_link));
-$tags = elgg_view('output/tags', array('tags' => $kpax->tags));
-$date = elgg_view_friendly_time($kpax->time_created);
+$tags = elgg_view('output/tags', array('tags' => $objGame->tags));
+$date = elgg_view_friendly_time($objGame->created_at);
 
 // The "on" status changes for comments, so best to check for !Off
 if ($kpax->comments_on != 'Off') {
@@ -48,7 +59,7 @@ $metadata = elgg_view_menu('entity', array(
     'handler' => 'kpax',
     'sort_by' => 'priority',
     'class' => 'elgg-menu-hz',
-        ));
+));
 
 $subtitle = "<p>$author_text $date $comments_link</p>";
 $subtitle .= $categories;
@@ -62,23 +73,20 @@ if ($full) {
     $title = false;
 
     $contentFooter = "";
-    $objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
-    $objGame = $objKpax->getGame($kpax->guid, $_SESSION["campusSession"]);
+
     if (intval($owner->guid) == intval(elgg_get_logged_in_user_entity()->guid)) {
-        $contentFooter .= "Game id: " . $objGame->secretGame;
+        $contentFooter .= "Game id: " . $objGame->guid; //$objGame->secretGame;
     }
 
-
-    $objScore = $objKpax->getScore($objGame->secretGame);
-    $objCategory = $objKpax->getCategory($_SESSION["campusSession"], $kpax->idCategory); //NOU
+    $objScore = $objKpax->getScore($objGame->guid)['body']; //$objGame->secretGame);
+    $objCategory = $objKpax->getCategory($_SESSION["campusSession"], $objGame->category)['body'];
 
     $body = elgg_view('output/longtext', array(
-//NOU - Línia modificada        
-        'value' => $kpax->description . '<br>' . "Category: " . $objCategory->name . '<br>' . "Date of creation: " . $kpax->creationDate . '<br>' . $contentFooter,
+        'value' => $objGame->description . '<br>' . "Category: " . $objCategory->name . '<br>' . "Date of creation: " . $objGame->created_at . '<br>' . $contentFooter,
         'class' => 'kpax-post',
             ));
 
-    $header = elgg_view_title($kpax->title);
+    $header = elgg_view_title($objGamex§->name);
 
     $params = array(
         'entity' => $kpax,
@@ -107,7 +115,6 @@ $scoreHTML
 HTML;
 } else {
     // brief view
-
     $params = array(
         'entity' => $kpax,
         'metadata' => $metadata,

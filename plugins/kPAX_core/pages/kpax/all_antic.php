@@ -30,6 +30,8 @@ echo elgg_view_page($title, $body);
 
 ?>
 
+<!-- DEL
+
 //NO TINC CLAR QUÈ HA D'ANAR AQUÍ
 
 /*
@@ -129,3 +131,4 @@ echo elgg_view('input/hidden', array('name' => 'container_guid', 'value' => $con
 echo elgg_view_page($title, $body);
 */
 ?>
+-->

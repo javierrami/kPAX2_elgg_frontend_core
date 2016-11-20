@@ -12,6 +12,7 @@
  * @return array
  */
 function kpax_prepare_form_vars($kpax = null) {
+
 	// input names => defaults
 	$values = array(
 		'title' => get_input('title', ''), // bookmarklet support
