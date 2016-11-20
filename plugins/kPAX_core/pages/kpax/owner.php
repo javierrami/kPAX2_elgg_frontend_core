@@ -65,23 +65,24 @@ if(!isset($fields))
 	$_SESSION['gameListValues'] = $values;
 }
 
-$gameList = $objKpax->getListGames($_SESSION["campusSession"], $idOrderer, $idFilterer, $fields, $values);
-if(isset($gameList))
-{
+$response = $objKpax->getListGames($_SESSION["campusSession"], $idOrderer, $idFilterer, $fields, $values);
+
+if($response['status'] == 200) {
 	system_message(elgg_echo('kpax:list:success'));
 	/*
 	 * Adding the gameIds to the elgg list.
-	 * 
+	 *
 	 * Forcing elgg to list the games in the same
 	 * order as gotten from srvKpax. Not by default
 	 * elgg order (time_created desc).
 	 */
+	$gameList = $response['body'];
 	$where = array();
 	$orderBy = ' CASE ';
 	for($i = 0, $size = sizeof($gameList); $i < $size; ++$i)
 	{
 		$idGame = $gameList[$i]->idGame;
-		
+
 		$where[] = $idGame;
 		$orderBy = $orderBy . " WHEN e.guid = " . $idGame . " THEN " . ($i + 1);
 	}
@@ -89,8 +90,9 @@ if(isset($gameList))
 	$orderBy = $orderBy . " END ";
 	$options = array_merge($options, array('order_by' => $orderBy));
 }
-else
+else {
     register_error(elgg_echo('kpax:list:failed'));
+}
 
 //LISTING THE GAMES. All games by default when srvKpax fails.
 $content = elgg_list_entities($options);

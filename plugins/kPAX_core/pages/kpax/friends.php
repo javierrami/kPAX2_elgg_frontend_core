@@ -22,18 +22,17 @@ $title = elgg_echo('kpax:friends');
 //Getting the friends ids to filter the resulting list.
 $friends = get_user_friends_of($owner->guid, ELGG_ENTITIES_ANY_VALUE, 999999, false);
 $friendsIds = array();
-for($i = 0, $size = sizeof($friends); $i < $size; ++$i)
-{
+for($i = 0, $size = sizeof($friends); $i < $size; ++$i) {
 	$friendsIds[] = $friends[$i] -> getGUID();
 }
 
 //DEFAULT OPTIONS FOR ELGG LISTING. All games.
 $options = array(
-    'types' => 'object',
-    'subtypes' => 'kpax',
-    'limit' => 10,
-    'full_view' => false,
-        );
+  'types' => 'object',
+  'subtypes' => 'kpax',
+  'limit' => 10,
+  'full_view' => false,
+);
 
 //GETTING THE GAME LIST FROM SRVKPAX
 $objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
@@ -62,10 +61,11 @@ if(!isset($fields))
 	$_SESSION['gameListValues'] = $values;
 }
 
-$gameList = $objKpax->getListGames($_SESSION["campusSession"], $idOrderer, $idFilterer, $fields, $values);
-if(isset($gameList))
-{
+$response = $objKpax->getListGames($_SESSION["campusSession"], $idOrderer, $idFilterer, $fields, $values);
+
+if($response['status'] == 200) {
 	system_message(elgg_echo('kpax:list:success'));
+
 	/*
 	 * Adding the gameIds to the elgg list.
 	 * 
@@ -73,6 +73,7 @@ if(isset($gameList))
 	 * order as gotten from srvKpax. Not by default
 	 * elgg order (time_created desc).
 	 */
+	$gameList =  $response['body'];
 	$where = array();
 	$orderBy = ' CASE ';
 	for($i = 0, $size = sizeof($gameList); $i < $size; ++$i)
@@ -87,8 +88,9 @@ if(isset($gameList))
 	$options = array_merge($options, array('order_by' => $orderBy));
 	$options = array_merge($options, array('owner_guids' => $friendsIds));
 }
-else
+else {
     register_error(elgg_echo('kpax:list:failed'));
+}
 
 //LISTING THE GAMES. All games by default when srvKpax fails.
 $content = elgg_list_entities($options);

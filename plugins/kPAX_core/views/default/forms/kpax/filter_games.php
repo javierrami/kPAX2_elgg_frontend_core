@@ -1,7 +1,7 @@
 <?php
 $title = elgg_extract('title', $vars, '');
 $category = elgg_extract('category', $vars, ''); 
-//Falten les plataformes
+//TODO: Falten les plataformes
 $skills = elgg_extract('skills', $vars, '');
 $tags = elgg_extract('tags', $vars, '');
 ?>
@@ -18,7 +18,7 @@ $tags = elgg_extract('tags', $vars, '');
 
 <div> 
     <label><?php echo elgg_echo('kPAX:game:platforms'); ?></label><br />
-    <?php echo elgg_view('input/checkboxes', array('name' => "plataformes", //It'd be great to include the logos
+    <?php echo elgg_view('input/checkboxes', array('name' => "platforms", //TODO: It'd be great to include the logos
                                                    'options' => array('web' => '1', 
                                                                       'android' => '2',
                                                                       'iOS' => '3',

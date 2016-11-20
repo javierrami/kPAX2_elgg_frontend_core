@@ -40,7 +40,7 @@ $guid = elgg_extract('guid', $vars, null);
 
 <div> 
     <label><?php echo elgg_echo('kPAX:game:platforms'); ?></label><br />
-    <?php echo elgg_view('input/checkboxes', array('name' => "plataformes", //It'd be great to include the logos
+    <?php echo elgg_view('input/checkboxes', array('name' => "platforms", //It'd be great to include the logos
                                                    'options' => array('web' => '1', 
                                                                       'android' => '2',
                                                                       'iOS' => '3',
@@ -62,6 +62,7 @@ $guid = elgg_extract('guid', $vars, null);
 
 <h3>Security</h3>
 
+<!-- TODO
 <p>In order to connect your game to kPAX, it is necessary to create a specific public/private key pair. 
 It can be done using <A HREF=http://www.openssl.org/>openSSL</A>. You only need to run the command:
 </p>
@@ -69,7 +70,7 @@ It can be done using <A HREF=http://www.openssl.org/>openSSL</A>. You only need 
 <p><code>openssl req -out requestUser.csr -new -newkey rsa:2048 -nodes -keyout private.key</code>
 </p>
 
-<!-- <p><code>openssl req -passout pass:abcdefg -subj "/C=US/ST=IL/L=Chicago/O=IBM Corporation/OU=IBM Software Group/CN=Rational Performance Tester CA/emailAddress=rpt@abc.ibm.com" -new > waipio.ca.cert.csr</p> -->
+< ! - - <p><code>openssl req -passout pass:abcdefg -subj "/C=US/ST=IL/L=Chicago/O=IBM Corporation/OU=IBM Software Group/CN=Rational Performance Tester CA/emailAddress=rpt@abc.ibm.com" -new > waipio.ca.cert.csr</p> - - >
 
 <p>
 Once you have run it, you should have two text files: the private key (.pml), which is only for your eyes, and the
@@ -79,8 +80,9 @@ game's information sheet.
 
 <div>
     <label><?php echo elgg_echo('kPAX:game:csr_file'); ?></label><br />
-    <?php echo elgg_view('input/file', array('name' => 'csr_file', 'value' => $csr_file)); ?>
+    < ?php echo elgg_view('input/file', array('name' => 'csr_file', 'value' => $csr_file)); ?>
 </div>
+-->
 
 <?php
 
@@ -94,3 +96,4 @@ if ($guid) {
 <div>
     <?php echo elgg_view('input/submit', array('value' => elgg_echo('kPAX:game:send'))); ?>
 </div>
+

@@ -8,14 +8,13 @@ if ($vars['objGameList']) {
         <hr>
         <?php
         foreach ($vars['objGameList'] as $game) {
-            echo "<p>" . $game->idGame . " - " . "<a href=view/" . $game->idGame . "> $game->name </a>" . $game->idCategory . "</p>";
+            echo "<p>" . $game->guid . " - " . "<a href=view/" . $game->guid . "> $game->name </a>" . $game->category . "</p>";
         }
         ?>
     </div>
     <?php
 }
-else
-{ 
+else { 
 	elgg_echo('kPAX:noGames');
 }
 ?> 
