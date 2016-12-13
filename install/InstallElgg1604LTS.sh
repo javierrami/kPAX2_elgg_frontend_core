@@ -28,13 +28,13 @@ read -rsp $'Press any key to continue...\n' -n1
 # MySQL
 clear
 echo "About to Install MySQL"
-apt-get install mysql-server
+apt-get install mysql-server mysql-client
 read -rsp $'Press any key to continue...\n' -n1
 
 # PHP
 clear
 echo "About to Install PHP"
-apt-get install libapache2-mod-php
+apt-get install php7.0 libapache2-mod-php7.0 php-mysql php-dom
 read -rsp $'Press any key to continue...\n' -n1
 
 #  Config /etc/apache2/apache2.conf
@@ -85,17 +85,16 @@ ln -sf /var/www/html/elgg-2.2.2 /var/www/html/kpax2
 
 # Configure settings.php
 echo "About to configure settings.php"
-chown www-data:www-data /var/www/html/kpax2/elgg-config
+# chown www-data:www-data /var/www/html/kpax2/elgg-config
 
-#Prova
-# cp /var/www/html/elgg-2.1.1/vendor/elgg/elgg/elgg-config/settings.example.php /var/www/html/kpax2/elgg-config/settings.php
-# cd /var/www/html/kpax2/elgg-config/
-# sed -i 's/{{timezone}}/Europe\/Amsterdam/g' settings.php
-# sed -i 's/{{dbuser}}/elgguser/g' settings.php
-# sed -i 's/{{dbpassword}}/elggpassword/g' settings.php
-# sed -i 's/{{dbname}}/elggDB/g' settings.php
-# sed -i 's/{{dbhost}}/localhost/g' settings.php
-# sed -i 's/{{dbprefix}}/elggDB_/g' settings.php
+cp /var/www/html/elgg-2.2.2/vendor/elgg/elgg/elgg-config/settings.example.php /var/www/html/kpax2/elgg-config/settings.php
+cd /var/www/html/kpax2/elgg-config/
+sed -i 's/{{timezone}}/Europe\/Amsterdam/g' settings.php
+sed -i 's/{{dbuser}}/elgguser/g' settings.php
+sed -i 's/{{dbpassword}}/elggpassword/g' settings.php
+sed -i 's/{{dbname}}/elggDB/g' settings.php
+sed -i 's/{{dbhost}}/localhost/g' settings.php
+sed -i 's/{{dbprefix}}/elggDB_/g' settings.php
 read -rsp $'Press any key to continue...\n' -n1
 
 # Install Elgg
