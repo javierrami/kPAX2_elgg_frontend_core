@@ -24,7 +24,7 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	
+
 	padding: 3px 10px;
   background-color: #fff;
 	border: 1px solid #28f;
@@ -74,7 +74,7 @@
 	border-bottom: 0;
 	background: #eee;
 	margin: 0 0 0 5px;
-	
+
 	-webkit-border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
@@ -103,9 +103,10 @@
 }
 
 
-/* ***************************************
-	BREADCRUMBS
-*************************************** */
+/****************************************************************
+	BREADCRUMBS Apariencia opcions menu una vegada triada opció ppal.
+************************************************************** */
+
 .elgg-breadcrumbs {
 	color: #888;
   margin-bottom: 5px;
@@ -135,7 +136,7 @@
 
 
 /* ***************************************
-	TOPBAR MENU
+	TOPBAR MENU Menú Administrador/Setups/Logout
 *************************************** */
 .elgg-menu-topbar {
 	float: left;
@@ -180,12 +181,13 @@
 }
 
 
-/* ***************************************
-	SITE MENU
-*************************************** */
+/* ************************************************
+	SITE MENU Definexi posició i estil menu principal
+************************************************* */
+
 .elgg-menu-site {
 	z-index: 1;
-  width: 988px;
+  width: 998px;
   background-color: rgba(0, 0, 0, 0.25);
   border-color: rgba(0, 0, 0, 0.25);
   border-width: 1px 1px 0px 1px;
@@ -198,7 +200,7 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-
+/* Size de la font de les opcions de menu*/
 .elgg-menu-site > li > a {
   font-size: 13px;
 	font-weight: bold;
@@ -211,13 +213,13 @@
   border-style: solid;
   border-color: transparent;
 }
-
+/* Efecte desplegable quan pitjan more*/
 .elgg-menu-site > li > a:hover {
 	text-decoration: none;
 }
-
+/* Menu defecte*/
 .elgg-menu-site-default {
-	position: absolute;
+	position:relative; /* Per posar la barra de menus a dalt*/
 	bottom: 0;
 	left: 0;
 	height: 34px;
@@ -238,7 +240,8 @@
 }
 
 .elgg-menu-site > li > ul {
-	display: none;
+	position : absolute; /* Per evitar que el desplegable desplace tot cap a sota*/
+  display: none;
 	background-color: #fff;
 }
 
@@ -330,6 +333,7 @@
 /* ***************************************
 	FILTER MENU
 *************************************** */
+
 .elgg-menu-filter {
 	margin-bottom: 5px;
 	border-bottom: 2px solid #ccc;
@@ -342,7 +346,7 @@
 	border-bottom: 0;
 	background-color: #eee;
 	margin: 0 0 0 5px;
-	
+
 	-webkit-border-radius: 5px 5px 0 0;
 	-moz-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
@@ -374,17 +378,18 @@
 /* ***************************************
 	PAGE MENU
 *************************************** */
+
 .elgg-menu-page {
 	margin-bottom: 20px;
 }
 
 .elgg-menu-page a {
 	display: block;
-	
+
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	
+
 	background: #fff url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/button.png) repeat-x left top;
   border: 1px solid #bbb;
 	padding: 5px 15px;
@@ -405,7 +410,7 @@
 	display: none;
 	margin-left: 15px;
 }
-.elgg-menu-page .elgg-menu-closed:before, 
+.elgg-menu-page .elgg-menu-closed:before,
 .elgg-menu-page .elgg-menu-opened:before {
 	display: inline-block;
 	padding-right: 5px;
@@ -433,7 +438,7 @@
 	border: solid 1px;
 	border-color: #888;
 	background-color: #fff;
-	
+
 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
@@ -535,11 +540,11 @@
 *************************************** */
 .elgg-menu-owner-block li a {
 	display: block;
-	
+
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	
+
 	background: #fff url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/button.png) repeat-x left top;
   border: 1px solid #bbb;
 	padding: 5px 15px;
@@ -569,6 +574,7 @@
 /* ***************************************
 	RIVER
 *************************************** */
+
 .elgg-menu-river {
 	float: right;
 	margin-left: 15px;

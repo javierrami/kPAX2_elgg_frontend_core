@@ -1,45 +1,46 @@
-<?php
 /**
  * Page Layout
  *
  * Contains CSS for the page shell and page layout
  *
  * Default layout: 990px wide, centered. Used in default page shell
- *
- * @package Elgg.Core
- * @subpackage UI
  */
-?>
 
 /* ***************************************
 	PAGE LAYOUT
 *************************************** */
 /***** DEFAULT LAYOUT ******/
-<?php // the width is on the page rather than topbar to handle small viewports ?>
+/* the width is on the page rather than topbar to handle small viewports */
 .elgg-page-default {
-	min-width: 990px;
+	min-width: 800px;
 }
 .elgg-page-default .elgg-page-header > .elgg-inner {
-	width: 990px;
-	height: 150px;
+	max-width: 990px;
 	margin: 0 auto;
-
+	//min-height: 65px;
+  height: 150px;
+}
+.elgg-page-default .elgg-page-navbar > .elgg-inner {
+	max-width: 990px;
+	margin: 0 auto;
+	height: auto;
 }
 .elgg-page-default .elgg-page-body > .elgg-inner {
-	width: 990px;
+	max-width: 990px;
 	margin: 0 auto;
 }
 .elgg-page-default .elgg-page-footer > .elgg-inner {
-	width: 960px;
+	max-width: 990px;
 	margin: 0 auto;
-	padding: 10px 15px;
+	//padding: 5px 0;
+  padding: 10px 15px;
+	//border-top: 1px solid #DEDEDE;
 }
-
 
 /***** TOPBAR ******/
 .elgg-page-topbar {
 	background: #444 url(<?php echo elgg_get_site_url(); ?>mod/theme_kPAX/graphics/topbar.png) repeat-x bottom left;
-	border-bottom: 1px solid #000;
+  border-bottom: 1px solid #000;
 	position: relative;
 	z-index: 9000;
 }
@@ -49,11 +50,11 @@
   margin: auto;
 }
 
-
 /***** PAGE MESSAGES ******/
 .elgg-system-messages {
 	position: fixed;
-	top: 40px;
+	//top: 32px;
+  top: 40px;
 	right: 20px;
 	max-width: 500px;
 	z-index: 2000;
@@ -65,53 +66,92 @@
 	margin: 0;
 }
 
-
 /***** PAGE HEADER ******/
 .elgg-page-header {
-	position: relative;
+  position: relative;
 	background: #000 url(<?php echo elgg_get_site_url(); ?>mod/theme_kPAX/graphics/header.png) repeat-x top left;
 }
 .elgg-page-header > .elgg-inner {
 	position: relative;
 }
 
-
+/***** PAGE NAVBAR ******/
+/*
+.elgg-page-navbar {
+	padding: 0 20px;
+	position: relative;
+	background: #4787B8;
+}
+.elgg-page-navbar > .elgg-inner {
+	position: relative;
+}
+.elg-page-navbar {
+  padding: 0px 20px;
+  position: relative;
+  background: #4787B8;
+}
+*/
 /***** PAGE BODY LAYOUT ******/
+.elgg-page-body {
+	padding: 0 20px;
+}
+
 .elgg-layout {
 	min-height: 360px;
 }
-.elgg-layout-one-sidebar {
-	background: transparent url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/sidebar.png) repeat-y right top;
-}
-.elgg-layout-two-sidebar {
-	background: transparent url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/sidebar-double.png) repeat-y right top;
+.elgg-layout-widgets > .elgg-widgets {
+	float: right;
 }
 .elgg-layout-error {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 .elgg-sidebar {
 	position: relative;
-	padding: 20px 15px;
+	//padding: 32px 0 20px 30px;
+  padding: 20px 15px;
 	float: right;
-	width: 200px;
+	//width: 21.212121%;
+  width: 200px;
 	margin: 0;
+	border-left: 1px solid #EBEBEB;//Posa la vora a la separació de menus
 }
 .elgg-sidebar-alt {
 	position: relative;
-	padding: 20px 15px;
+	//padding: 32px 30px 20px 0;
+  padding: 20px 15px;
 	float: left;
+	//width: 16.161616%;
 	width: 150px;
-	margin: 0;
+  //margin: 0 30px 0 0;
+  margin: 0;
+	border-right: 1px solid #EBEBEB;
 }
 .elgg-main {
 	position: relative;
 	min-height: 360px;
-	padding: 15px;
+	//padding: 12px 0 10px 0;
+  padding: 15px;
 }
 .elgg-main > .elgg-head {
+	//padding-bottom: 5px;
+	//border-bottom: 1px solid #EBEBEB;
 	margin-bottom: 10px;
 }
-
+.elgg-layout-one-sidebar .elgg-main {
+	float: left;
+	width: 72.525252%;
+}
+.elgg-layout-one-sidebar {
+	background: transparent url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/sidebar.png) repeat-y right top;
+}
+//Això descol·loca el menu lateral
+/*.elgg-layout-two-sidebar .elgg-main {
+	float: left;
+	width: 50.101010%;
+}*/
+.elgg-layout-two-sidebar {
+	background: transparent url(<?php echo elgg_get_site_url(); ?>mod/bright-theme/graphics/sidebar-double.png) repeat-y right top;
+}
 
 /***** PAGE FOOTER ******/
 .elgg-page-footer {
@@ -135,9 +175,7 @@
 	background: #222 url(<?php echo elgg_get_site_url(); ?>mod/theme_kPAX/graphics/footer.png) top right no-repeat;
 }
 
-
-
-/**** Afegits C�sar ***/
+/**** Afegits Cesar ***/
 
 .coslogin {
 	width: 300px;

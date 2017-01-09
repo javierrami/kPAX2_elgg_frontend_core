@@ -17,7 +17,9 @@ $options = array(
 );
 
 //GETTING THE GAME LIST FROM SRVKPAX
-$objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
+//$objKpax = new kpaxSrv(elgg_get_logged_in_user_entity()->username);
+//Prova per determinar si l'objecte depen del paràmetre username
+$objKpax = new kpaxSrv(elgg_get_logged_in_user_guid()->username);
 
 /*
 //Parameters
@@ -46,8 +48,11 @@ if(!isset($fields))
 }
 */
 
-//$page_owner = elgg_get_page_owner_entity();
-$page_owner = "admin";
+//$page_owner = elgg_get_page_owner_guid();
+//$page_owner = "admin";
+//returnem el guid de l'usuari logged
+$page_owner = elgg_get_logged_in_user_guid();
+
 $response = $objKpax->getUserListGames($page_owner,$_SESSION["campusSession"]);
 
 if($response['status'] == 200) {
@@ -73,13 +78,21 @@ if($response['status'] == 200) {
 	$options = array_merge($options, array('guids' => $where));
 	$orderBy = $orderBy . " END ";
 	$options = array_merge($options, array('order_by' => $orderBy));
-}
+
+
+  }
+
 else {
     register_error(elgg_echo('kpax:list:failed'));
 }
 
+
+
 //LISTING THE GAMES. All games by default when srvKpax fails.
-$content = elgg_list_entities($options);
+
+// Deshabilitant aquesta línia carrega correctament. És la que llença la consulta contra ElggDB
+//$content = elgg_list_entities($options);
+
 
 if (!$content) {
     $content = '<p>' . elgg_echo('kpax:none') . '</p>';
